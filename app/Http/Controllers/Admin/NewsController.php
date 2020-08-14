@@ -13,11 +13,11 @@ class NewsController extends Controller
   }
   public function create(Request $request)
   {
-      // 以下を追記
       // Varidationを行う
       $this->validate($request, News::$rules);
       $news = new News;
       $form = $request->all();
+      
       // フォームから画像が送信されてきたら、保存して、$news->image_path に画像のパスを保存する
       if (isset($form['image'])) {
         $path = $request->file('image')->store('public/image');
