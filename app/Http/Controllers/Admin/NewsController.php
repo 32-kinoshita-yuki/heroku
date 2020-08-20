@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\News;
+// カリキュラム17にて追記
+use App\History;
+use Carbon\Carbon;
+
 class NewsController extends Controller
 {
     public function add()
@@ -80,9 +84,14 @@ class NewsController extends Controller
       unset($news_form['_token']);
       // 該当するデータを上書きして保存する
       $news->fill($news_form)->save();
+       // カリキュラム17にて追記
+        $history = new History;
+        $history->news_id = $news->id;
+        $history->edited_at = Carbon::now();
+        $history->save();
 
-      return redirect('admin/news');
-  }
+        return redirect('admin/news/');
+    }
       
       // カリキュラム16にて追記
   public function delete(Request $request)
