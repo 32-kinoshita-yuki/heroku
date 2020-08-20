@@ -15,56 +15,63 @@
                             @endforeach
                         </ul>
                     @endif
-                    
                     <div class="form-group row">
-                        <label class="col-md-2" for="name">氏名</label>
+                        <label class="col-md-2" for="title">名前</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="name">{{ old('name') }}</textarea>
+                            <input type="text" class="form-control" name="name" value="{{ $profile_form->name }}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2" for="gender">性別</label>
+                        <label class="col-md-2" for="body">性別</label>
                         <div class="col-md-10">
-                            @if  (old('gender')  == 'male') 
-                              <input type="radio" class="radio" name="gender" value="male" checked="checked">男性
-                              <input type="radio" class="radio" name="gender" value="female">女性
-                            @elseif (old('gender')  == 'female')
-                              <input type="radio" class="radio" name="gender" value="male">男性
-                              <input type="radio" class="radio" name="gender" value="female" checked="checked">女性
-                            @else
-                              <input type="radio" class="radio" name="gender" value="male">男性
-                              <input type="radio" class="radio" name="gender" value="female">女性
-                            @endif
+                            <input type="text" class="form-control" name="gender" value="{{ $profile_form->gender }}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2" for="hobby">趣味</label>
+                        <label class="col-md-2" for="body">趣味</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="hobby">{{ old('hobby') }}</textarea>
+                            <input type="text" class="form-control" name="hobby" value="{{ $profile_form->hobby }}">
+                                
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2" for="introduction">自己紹介欄</label>
+                        <label class="col-md-2" for="body">自己紹介</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="introduction" rows="20">{{ old('introduction') }}</textarea>
+                            <input type="text" class="form-control" name="introduction" value="{{ $profile_form->introduction }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2" for="image">画像</label>
+                        <div class="col-md-10">
+                            <input type="file" class="form-control-file" name="image">
+                            <div class="form-text text-info">
+                                設定中: {{ $profile_form->image_path }}
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="remove" value="true">画像を削除
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-10">
                             <input type="hidden" name="id" value="{{ $profile_form->id }}">
-                    {{ csrf_field() }}
+                            {{ csrf_field() }}
                             <input type="submit" class="btn btn-primary" value="更新">
                         </div>
                     </div>
                 </form>
+                <!--課題-->
                 <div class="row mt-5">
                     <div class="col-md-4 mx-auto">
-                        <h2>編集履歴</h2>
+                        <h2>更新履歴</h2>
                         <ul class="list-group">
-                            @if ($profile_form->profileHistories != NULL)
-                                @foreach ($profile_form->profileHistories as $profileHistory)
-                                    <li class="list-group-item">{{ $profileHistory->edited_at }}</li>
-                                @endforeach
+                            @if ($profile_form->changelogs !=NULL)
+                             @foreach ($profile_form->changelogs as $changelog)
+                              <li class="list-group-item">{{ $changelog->edited_at }}</li>
+                             @endforeach
                             @endif
                         </ul>
                     </div>
@@ -73,5 +80,4 @@
         </div>
     </div>
 @endsection
-
 
