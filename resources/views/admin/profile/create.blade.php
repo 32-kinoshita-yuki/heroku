@@ -1,53 +1,42 @@
-    @extends('layouts.profile')
+@extends('layouts.profile')
 
-@section('title', 'My プロフィール')
+
+@section('title', 'プロフィール作成画面')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>My プロフィール</h2>
-                <!--課題4 formの送信先をAdmin\ProfileController@createに指定-->
                 <form action="{{ action('Admin\ProfileController@create') }}" method="post" enctype="multipart/form-data">
 
-                    @if (count($errors) > 0)
+                @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
                                 <li>{{ $e }}</li>
                             @endforeach
                         </ul>
                     @endif
-                    
-                    <!--課題4 氏名、性別、趣味、自己紹介欄の作成、課題6 バリデーションの設定-->
                     <div class="form-group row">
-                        <label class="col-md-2" for="name">氏名</label>
+                        <label class="col-md-2">氏名</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="name">{{ old('name') }}</textarea>
+                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2" for="gender">性別</label>
+                        <label class="col-md-2">性別</label>
                         <div class="col-md-10">
-                            @if  (old('gender')  == 'male') 
-                              <input type="radio" class="radio" name="gender" value="male" checked="checked">男性
-                              <input type="radio" class="radio" name="gender" value="female">女性
-                            @elseif (old('gender')  == 'female')
-                              <input type="radio" class="radio" name="gender" value="male">男性
-                              <input type="radio" class="radio" name="gender" value="female" checked="checked">女性
-                            @else
-                              <input type="radio" class="radio" name="gender" value="male">男性
-                              <input type="radio" class="radio" name="gender" value="female">女性
-                            @endif
+                            <input type="text" class="form-control" name="gender" value="{{ old('gender') }}" >
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2" for="hobby">趣味</label>
+                        <label class="col-md-2">趣味・特技</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="hobby">{{ old('hobby') }}</textarea>
+                            <input type="text" class="form-control" name="hobby" value="{{ old('hobby') }}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2" for="introduction">自己紹介欄</label>
+                        <label class="col-md-2">自己紹介欄</label>
                         <div class="col-md-10">
                             <textarea class="form-control" name="introduction" rows="20">{{ old('introduction') }}</textarea>
                         </div>
