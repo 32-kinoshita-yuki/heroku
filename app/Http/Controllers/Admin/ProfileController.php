@@ -39,7 +39,7 @@ class ProfileController extends Controller
       } else {
           $posts = Profile::all();
       }
-      return view('admin.news.index', ['posts' => $posts, 'cond_title' => $cond_title]);
+      return view('admin.profile.index', ['posts' => $posts, 'cond_title' => $cond_title]);
   }
     
     
@@ -80,4 +80,12 @@ class ProfileController extends Controller
         
         return redirect('admin/profile/edit?id=' . $profile->id);
     }
+    public function delete(Request $request)
+  {
+      // 該当するNews Modelを取得
+      $profile = Profile::find($request->id);
+      // 削除する
+      $profile->delete();
+      return redirect('admin/news/');
+  }
 }
