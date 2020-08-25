@@ -60,19 +60,7 @@ class ProfileController extends Controller
         // 送信されてきたフォームデータを格納する
         $profiles_form = $request->all();
         
-       if ($request->remove == 'true'){
-          $profile_form['image_path'] = null;
-      }elseif ($request->file('image')){
-          $path = $request->file('image')->store('public/image');
-          $profile_form['image_path'] = basename($path);
-      }else{
-          $profile_form['image_path'] = $profile->image_path;
-      }
-      
-      unset($profile_form['_token']);
-       unset($profile_form['image']);
-      unset($profile_form['remove']);
-      
+       
       $profile->fill($profile_form)->save();
      
       $Profile_histories = new ProfileHistory;
@@ -83,12 +71,4 @@ class ProfileController extends Controller
         
         return redirect('admin/profile/edit?id=' . $profile->id);
     }
-    public function delete(Request $request)
-  {
-      // 該当するNews Modelを取得
-      $profile = Profile::find($request->id);
-      // 削除する
-      $profile->delete();
-      return redirect('admin/news/');
   }
-}
