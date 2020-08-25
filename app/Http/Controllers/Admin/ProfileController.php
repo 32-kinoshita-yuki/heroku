@@ -56,9 +56,9 @@ class ProfileController extends Controller
          // Validationをかける
         $this->validate($request, Profile::$rules);
           //  Modelからデータを取得する
-        $profiles = Profile::find($request->id);
+        $profile = Profile::find($request->id);
         // 送信されてきたフォームデータを格納する
-        $profiles_form = $request->all();
+        $profile_form = $request->all();
         
        
       $profile->fill($profile_form)->save();
