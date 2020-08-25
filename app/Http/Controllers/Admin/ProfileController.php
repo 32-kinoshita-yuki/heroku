@@ -19,7 +19,6 @@ class ProfileController extends Controller
     {
          // Validationをかける
         $this->validate($request, Profile::$rules);
-
         $profiles = new Profile;
         $form = $request->all();
         
@@ -42,21 +41,25 @@ class ProfileController extends Controller
       return view('admin.profile.index', ['posts' => $posts, 'cond_title' => $cond_title]);
   }
     
-    
-    public function edit(Request $request)
-    {
-        $profiles = Profile::find($request->id);
-        return view('admin.profile.edit', ['profiles_form'=> $profiles]);
-    }
 
+ public function edit(Request $request)
+  {
+      // profile Modelからデータを取得する
+      $profile = Profile::find($request->id);
+      if (empty($profile)) {
+        abort(404);    
+      }
+      return view('admin.profile.edit', ['profile_form' => $profile]);
+  }
     public function update(Request $request)
     {
-         // profileValidationをかける
+         // Validationをかける
         $this->validate($request, Profile::$rules);
           //  Modelからデータを取得する
         $profiles = Profile::find($request->id);
         // 送信されてきたフォームデータを格納する
         $profiles_form = $request->all();
+        
        if ($request->remove == 'true'){
           $profile_form['image_path'] = null;
       }elseif ($request->file('image')){
@@ -67,7 +70,7 @@ class ProfileController extends Controller
       }
       
       unset($profile_form['_token']);
-      unset($profile_form['image']);
+       unset($profile_form['image']);
       unset($profile_form['remove']);
       
       $profile->fill($profile_form)->save();
