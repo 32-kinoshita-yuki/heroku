@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\News;
-// カリキュラム17にて追記
-use App\History;
+use App\History;// カリキュラム17にて追記
 use Carbon\Carbon;
+use Storage; //herokuにて追記
 
 class NewsController extends Controller
 {
@@ -24,9 +24,8 @@ class NewsController extends Controller
       
       // フォームから画像が送信されてきたら、保存して、$news->image_path に画像のパスを保存する
       if (isset($form['image'])) {
-        $path = $request->file('image') //画像をアップロードするメソッド
-        ->store('public/image'); //どこのフォルダにファイルを保存するか、パスを指定するメソッド
-        $news->image_path = basename($path);
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+        $news->image_path = Storage::disk('s3')->url($path);
       } else {
           $news->image_path = null;
       }

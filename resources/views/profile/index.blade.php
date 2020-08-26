@@ -1,7 +1,8 @@
 @extends('layouts.front')
+@section('title', '登録済みプロフィールの一覧')
 
 @section('content')
-     <div class="container">
+    <div class="container">
         <div class="row">
             <h2>プロフィール一覧</h2>
         </div>
@@ -37,9 +38,23 @@
                                 <th width="30%">自己紹介</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            @foreach($posts as $profile)
+                                <tr>
+                                    <th>{{ $profile->id }}</th>
+                                    <td>{{ \Str::limit($profile->name, 10) }}</td>
+                                    <td>{{ \Str::limit($profile->gender, 10) }}</td>
+                                    <td>{{ \Str::limit($profile->hobby, 50) }}</td>
+                                    <td>{{ \Str::limit($profile->introduction, 50) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+
+
