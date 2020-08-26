@@ -1,8 +1,7 @@
-@extends('layouts.admin')
-@section('title', '登録済みプロフィールの一覧')
+@extends('layouts.front')
 
 @section('content')
-    <div class="container">
+     <div class="container">
         <div class="row">
             <h2>プロフィール一覧</h2>
         </div>
@@ -38,25 +37,6 @@
                                 <th width="30%">自己紹介</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach($posts as $profile)
-                                <tr>
-                                    <th>{{ $profile->id }}</th>
-                                    <td>{{ \Str::limit($profile->name, 10) }}</td>
-                                    <td>{{ \Str::limit($profile->gender, 10) }}</td>
-                                    <td>{{ \Str::limit($profile->hobby, 50) }}</td>
-                                    <td>{{ \Str::limit($profile->introduction, 50) }}</td>
-                                    <td>
-                                        <div>
-                                            <a href="{{ action('Admin\ProfileController@edit', ['id' => $profile->id]) }}">編集</a>
-                                        </div>
-                                        <div>
-                                            <a href="{{ action('Admin\ProfileController@delete', ['id' => $profile->id]) }}">削除</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
                     </table>
                 </div>
             </div>
