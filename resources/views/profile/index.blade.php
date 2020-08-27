@@ -1,6 +1,5 @@
 @extends('layouts.profile')
 @section('title', 'プロフィール')
-
 @section('content')
     <div class="container">
         <div class="row">
