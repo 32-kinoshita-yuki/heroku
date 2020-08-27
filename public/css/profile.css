@@ -1,25 +1,28 @@
 body {
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #000;
-  color: #fff;
+  background-color:#fff;
+  color:  #808080;
 }
 
 .navbar-laravel {
-  background-color: #000;
+  background-color: #C0C0C0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .navbar-brand {
-  color: #fff !important;
+  color: #C0C0C0 !important;
 }
 
 .nav-link {
   color: #fff !important;
+  background-color:#C0C0C0;
 }
 
 .table-dark {
   color: #fff;
+  background-color:#C0C0C0;
+  
 }
 
 .list-group-item {
